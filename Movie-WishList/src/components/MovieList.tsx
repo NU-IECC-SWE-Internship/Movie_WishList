@@ -1,5 +1,5 @@
 import type { Movie } from "../data/movie";
-import ShowCard from "./MovieCard";
+import MovieCard from "./MovieCard";
 
 
 interface MovieListProps {
@@ -11,7 +11,7 @@ function MovieList({movies}: MovieListProps){
         <div>
             <ul>
             {movies.map(movie => (
-                <ShowCard key={movie.id} movie={movie}></ShowCard>
+                <MovieCard key={movie.id} movie={movie}></MovieCard>
             ))}
             </ul>
         </div>

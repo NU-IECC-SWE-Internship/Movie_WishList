@@ -1,5 +1,5 @@
 import './App.css'
-import ShowList from "./components/MovieList";
+import MovieList from './components/MovieList';
 import Movie from "./data/movie";
 
 
@@ -9,7 +9,7 @@ function App() {
     <div>
       <h1>My Shows</h1>
 
-      <ShowList movies={Movie} />
+      <MovieList movies={Movie} />
     </div>
   );
 }
