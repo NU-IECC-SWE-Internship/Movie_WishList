@@ -114,3 +114,11 @@ body {
   font-size: 0.875rem;
   color: var(--text-secondary);
 }
+
+.watch-button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
