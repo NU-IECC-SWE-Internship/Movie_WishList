@@ -1,26 +1,26 @@
 import { useEffect, useState } from "react";
-import MovieCard from "./MovieCard";
+import ShowCard from "./ShowCard";
 import SearchBar from "./SearchBar";
 
-import type { Movie } from "../data/movie";
+import type { Show } from "../data/shows";
 import { BASE_URL, options } from "../data/TMDB";
 
-interface MovieResponse {
-  results: Movie[];
+interface ShowResponse {
+  results: Show[];
 }
 
-function MovieList() {
-  const [movies, setMovies] = useState<Movie[]>([]);
+function ShowList() {
+  const [shows, setShows] = useState<Show[]>([]);
   const [isSearching, setIsSearching] = useState(false);
   const [submittedSearch, setSubmittedSearch] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   useEffect(() => {
-    loadMovies();
+    loadShows();
   }, []);
 
-  async function loadMovies(query = "") {
+  async function loadShows(query = "") {
     setLoading(true);
     setError("");
 
@@ -28,8 +28,8 @@ function MovieList() {
       const trimmedQuery = query.trim();
 
       const endpoint = trimmedQuery
-        ? `${BASE_URL}/search/movie?query=${encodeURIComponent(trimmedQuery)}`
-        : `${BASE_URL}/movie/popular`;
+        ? `${BASE_URL}/search/tv?query=${encodeURIComponent(trimmedQuery)}`
+        : `${BASE_URL}/tv/popular`;
 
       const response = await fetch(endpoint, options);
 
@@ -37,24 +37,24 @@ function MovieList() {
         throw new Error(`Request failed with status ${response.status}`);
       }
 
-      const data: MovieResponse = await response.json();
+      const data: ShowResponse = await response.json();
 
-      const watchedMovies: Movie[] = JSON.parse(
-        localStorage.getItem("watchedMovies") || "[]"
+      const watchedShows: Show[] = JSON.parse(
+        localStorage.getItem("watchedShows") || "[]"
       );
 
-      const updatedMovies = data.results.map((movie) => ({
-        ...movie,
-        watched: watchedMovies.some(
-          (watchedMovie) => watchedMovie.id === movie.id
+      const updatedShows = data.results.map((show) => ({
+        ...show,
+        watched: watchedShows.some(
+          (watchedShow) => watchedShow.id === show.id
         ),
       }));
 
-      setMovies(updatedMovies);
+      setShows(updatedShows);
     } catch (err) {
-      console.error("Failed to fetch movies", err);
-      setError("Could not load movies. Please try again.");
-      setMovies([]);
+      console.error("Failed to fetch shows", err);
+      setError("Could not load shows. Please try again.");
+      setShows([]);
     } finally {
       setLoading(false);
     }
@@ -64,27 +64,27 @@ function MovieList() {
     setSubmittedSearch(search);
     setIsSearching(false);
 
-    loadMovies(search);
+    loadShows(search);
   }
 
   function markWatched(id: number) {
-    setMovies((currentMovies) => {
-      const updatedMovies = currentMovies.map((movie) =>
-        movie.id === id
-          ? { ...movie, watched: !movie.watched }
-          : movie
+    setShows((currentShows) => {
+      const updatedShows = currentShows.map((show) =>
+        show.id === id
+          ? { ...show, watched: !show.watched }
+          : show
       );
 
-      const watchedMovies = updatedMovies.filter(
-        (movie) => movie.watched
+      const watchedShows = updatedShows.filter(
+        (show) => show.watched
       );
 
       localStorage.setItem(
-        "watchedMovies",
-        JSON.stringify(watchedMovies)
+        "watchedShows",
+        JSON.stringify(watchedShows)
       );
 
-      return updatedMovies;
+      return updatedShows;
     });
   }
 
@@ -97,7 +97,7 @@ function MovieList() {
 
       {isSearching && (
         <p className="search-hint">
-          Type a title...
+          Type a show title...
         </p>
       )}
 
@@ -109,7 +109,7 @@ function MovieList() {
 
       {loading && (
         <p className="search-status">
-          Loading movies...
+          Loading shows...
         </p>
       )}
 
@@ -120,10 +120,10 @@ function MovieList() {
       )}
 
       <div className="movie-grid">
-        {movies.map((movie) => (
-          <MovieCard
-            key={movie.id}
-            movie={movie}
+        {shows.map((show) => (
+          <ShowCard
+            key={show.id}
+            show={show}
             markWatched={markWatched}
           />
         ))}
@@ -132,4 +132,4 @@ function MovieList() {
   );
 }
 
-export default MovieList;
+export default ShowList;

@@ -82,7 +82,8 @@ body {
 
 /* Card Styling */
 
-.movie-card {
+.movie-card,
+.show-card {
   background-color: var(--bg-card);
   border-radius: 12px;
   overflow: hidden;
@@ -92,7 +93,8 @@ body {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.movie-card:hover {
+.movie-card:hover,
+.show-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
 }
@@ -105,7 +107,8 @@ body {
   background-color: #0b1120;
 }
 
-.movie-poster {
+.movie-poster,
+.show-poster {
   position: absolute;
   top: 0;
   left: 0;
@@ -142,7 +145,8 @@ body {
 
 /* Movie Content */
 
-.movie-content {
+.movie-content,
+.show-content {
   padding: 1rem;
   display: flex;
   flex-direction: column;
@@ -150,14 +154,16 @@ body {
   flex: 1;
 }
 
-.movie-title {
+.movie-title,
+.show-title {
   margin: 0;
   font-size: 1.1rem;
   font-weight: 600;
   line-height: 1.3;
 }
 
-.movie-meta {
+.movie-meta,
+.show-meta {
   display: flex;
   justify-content: space-between;
   align-items: center;

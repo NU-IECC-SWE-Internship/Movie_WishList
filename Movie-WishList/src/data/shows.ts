@@ -7,6 +7,7 @@ export interface Show {
     genres: Genre[];
     vote_average: number;
     number_of_seasons: number;
+    watched?: boolean;
 }
 
 export interface Genre {
