@@ -1,0 +1,92 @@
+.now-playing {
+  padding: 45px 65px;
+  background: #050505;
+  color: white;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+.section-header h2 {
+  margin: 0;
+  font-size: 30px;
+}
+
+.section-header p {
+  margin-top: 5px;
+  color: #777386;
+}
+
+.scroll-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.scroll-buttons button {
+  width: 45px;
+  height: 45px;
+
+  border-radius: 50%;
+  border: 1px solid #262626;
+
+  background: #090909;
+  color: white;
+
+  font-size: 26px;
+  cursor: pointer;
+}
+
+.movie-row {
+  display: flex;
+  gap: 22px;
+
+  overflow-x: auto;
+  scroll-behavior: smooth;
+
+  scrollbar-width: none;
+}
+
+.movie-row::-webkit-scrollbar {
+  display: none;
+}
+
+.now-playing-card {
+  flex: 0 0 220px;
+}
+
+.now-playing-card img {
+  width: 220px;
+  height: 330px;
+
+  object-fit: cover;
+
+  border-radius: 12px;
+
+  display: block;
+}
+
+.now-playing-card h3 {
+  margin: 14px 0 5px;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.now-playing-card p {
+  margin: 0;
+  color: #8b8796;
+  font-size: 14px;
+}
+
+.now-playing-card img:hover {
+  transform: scale(1.03);
+  transition: 0.25s;
+}
