@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import ShowCard from "../components/ShowCard";
-
 import type { Show } from "../data/shows";
 import { BASE_URL, options } from "../data/TMDB";
 
@@ -9,13 +9,16 @@ interface ShowResponse {
 }
 
 function ShowList() {
+  const [searchParams] = useSearchParams();
   const [shows, setShows] = useState<Show[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  const searchQuery = searchParams.get("search") ?? "";
+
   useEffect(() => {
-    loadShows();
-  }, []);
+    void loadShows(searchQuery);
+  }, [searchQuery]);
 
   async function loadShows(query = "") {
     setLoading(true);

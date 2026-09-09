@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import MovieCard from "../components/MovieCard";
-
 import type { Movie } from "../data/movie";
 import { BASE_URL, options } from "../data/TMDB";
 
@@ -9,13 +9,16 @@ interface MovieResponse {
 }
 
 function MovieList() {
+  const [searchParams] = useSearchParams();
   const [movies, setMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  const searchQuery = searchParams.get("search") ?? "";
+
   useEffect(() => {
-    loadMovies();
-  }, []);
+    void loadMovies(searchQuery);
+  }, [searchQuery]);
 
   async function loadMovies(query = "") {
     setLoading(true);
