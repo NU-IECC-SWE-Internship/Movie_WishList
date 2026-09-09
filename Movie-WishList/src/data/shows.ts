@@ -1,13 +1,12 @@
-export interface Movie {
+export interface Show {
     id: number;
-    title: string;
+    name: string;
     overview: string;
     poster_path: string | null;
-    release_date: string | null;
-    runtime: number;
+    first_air_date: string;
     genres: Genre[];
     vote_average: number;
-    watched?: boolean;
+    number_of_seasons: number;
 }
 
 export interface Genre {
