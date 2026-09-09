@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import MovieCard from "./MovieCard";
-import SearchBar from "./SearchBar";
+import MovieCard from "../components/MovieCard";
 
 import type { Movie } from "../data/movie";
 import { BASE_URL, options } from "../data/TMDB";
@@ -11,8 +10,6 @@ interface MovieResponse {
 
 function MovieList() {
   const [movies, setMovies] = useState<Movie[]>([]);
-  const [isSearching, setIsSearching] = useState(false);
-  const [submittedSearch, setSubmittedSearch] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -60,13 +57,6 @@ function MovieList() {
     }
   }
 
-  function handleSearch(search: string) {
-    setSubmittedSearch(search);
-    setIsSearching(false);
-
-    loadMovies(search);
-  }
-
   function markWatched(id: number) {
     setMovies((currentMovies) => {
       const updatedMovies = currentMovies.map((movie) =>
@@ -90,23 +80,6 @@ function MovieList() {
 
   return (
     <>
-      <SearchBar
-        onSearch={handleSearch}
-        onFocus={() => setIsSearching(true)}
-      />
-
-      {isSearching && (
-        <p className="search-hint">
-          Type a title...
-        </p>
-      )}
-
-      {submittedSearch && !isSearching && (
-        <p className="search-status">
-          Showing results for: {submittedSearch}
-        </p>
-      )}
-
       {loading && (
         <p className="search-status">
           Loading movies...

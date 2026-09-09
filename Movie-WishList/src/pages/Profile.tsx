@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import type { Movie } from "../data/movie";
 import type { Show } from "../data/shows";
 
-import MovieCard from "./MovieCard";
-import ShowCard from "./ShowCard";
+import MovieCard from "../components/MovieCard";
+import ShowCard from "../components/ShowCard";
 
 function Profile() {
   const [watchedMovies, setWatchedMovies] = useState<Movie[]>([]);

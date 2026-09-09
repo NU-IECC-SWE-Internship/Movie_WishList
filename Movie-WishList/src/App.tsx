@@ -1,21 +1,35 @@
 import "./App.css";
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import MovieList from "./components/MovieList";
-import ShowList from "./components/ShowList";
-import Profile from "./components/profile";
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+import MovieList from "./pages/MovieList";
+import ShowList from "./pages/ShowList";
+import Profile from "./pages/Profile";
+
+const navLinks = [
+  { text: "Home", url: "/" },
+  { text: "Movies", url: "/movies" },
+  { text: "Series", url: "/shows" },
+  { text: "Profile", url: "/profile" },
+  { text: "Search", url: "/search" },
+];
 
 function App() {
   return (
     <BrowserRouter>
-      <div className="app-container">
+      <div className="app-shell">
+        <Navbar links={navLinks} />
 
-        <Routes>
-          <Route path="/movies" element={<MovieList />} />
-          <Route path="/shows" element={<ShowList />} />
-          <Route path="/profile" element={<Profile />} />
-        </Routes>
-
+        <div className="app-container">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/movies" element={<MovieList />} />
+            <Route path="/shows" element={<ShowList />} />
+            <Route path="/profile" element={<Profile />} />
+          </Routes>
+        </div>
       </div>
     </BrowserRouter>
   );

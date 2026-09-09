@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import ShowCard from "./ShowCard";
-import SearchBar from "./SearchBar";
+import ShowCard from "../components/ShowCard";
 
 import type { Show } from "../data/shows";
 import { BASE_URL, options } from "../data/TMDB";
@@ -11,8 +10,6 @@ interface ShowResponse {
 
 function ShowList() {
   const [shows, setShows] = useState<Show[]>([]);
-  const [isSearching, setIsSearching] = useState(false);
-  const [submittedSearch, setSubmittedSearch] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -60,13 +57,6 @@ function ShowList() {
     }
   }
 
-  function handleSearch(search: string) {
-    setSubmittedSearch(search);
-    setIsSearching(false);
-
-    loadShows(search);
-  }
-
   function markWatched(id: number) {
     setShows((currentShows) => {
       const updatedShows = currentShows.map((show) =>
@@ -90,23 +80,6 @@ function ShowList() {
 
   return (
     <>
-      <SearchBar
-        onSearch={handleSearch}
-        onFocus={() => setIsSearching(true)}
-      />
-
-      {isSearching && (
-        <p className="search-hint">
-          Type a show title...
-        </p>
-      )}
-
-      {submittedSearch && !isSearching && (
-        <p className="search-status">
-          Showing results for: {submittedSearch}
-        </p>
-      )}
-
       {loading && (
         <p className="search-status">
           Loading shows...

@@ -8,6 +8,7 @@ export interface Movie {
     genres: Genre[];
     vote_average: number;
     watched?: boolean;
+    
 }
 
 export interface Genre {
