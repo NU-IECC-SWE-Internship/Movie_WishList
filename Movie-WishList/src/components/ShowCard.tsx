@@ -38,7 +38,7 @@ function ShowCard({ show, markWatched }: ShowCardProps) {
         </div>
 
         <button className="watch-button" onClick={() => markWatched(show.id)}>
-          {show.watched ? "Watched" : "Mark Watched"}
+          {show.watched ? "Mark Unwatched" : "Mark Watched"}
         </button>
       </div>
     </div>

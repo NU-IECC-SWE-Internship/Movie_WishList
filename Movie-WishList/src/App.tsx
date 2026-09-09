@@ -1,17 +1,23 @@
 import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import MovieList from "./components/MovieList";
 import ShowList from "./components/ShowList";
+import Profile from "./components/profile";
 
 function App() {
   return (
-    <div className="app-container">
-      <header className="header">
-        <h1>My Shows</h1>
-      </header>
+    <BrowserRouter>
+      <div className="app-container">
 
-      {/* <MovieList /> */}
-      <ShowList />
-    </div>
+        <Routes>
+          <Route path="/movies" element={<MovieList />} />
+          <Route path="/shows" element={<ShowList />} />
+          <Route path="/profile" element={<Profile />} />
+        </Routes>
+
+      </div>
+    </BrowserRouter>
   );
 }
 
